@@ -3,6 +3,8 @@ import Loader from './components/ui/Loader';
 import Navbar from './components/layout/Navbar';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
+import Work from './components/sections/Work';
+import Contact from './components/sections/Contact';
 import CustomCursor from './components/ui/CustomCursor';
 import { AnimatePresence } from 'framer-motion';
 
@@ -38,6 +40,8 @@ function App() {
           <Navbar />
           <Hero />
           <About />
+          <Work />
+          <Contact />
         </main>
       )}
     </>

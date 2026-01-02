@@ -7,20 +7,28 @@ const About = () => {
 
     // Tech stack with icons
     const techStack = [
+        { name: 'HTML', icon: '🌐' },
+        { name: 'CSS', icon: '🎨' },
+        { name: 'Bootstrap', icon: '🅱️' },
+        { name: 'Tailwind', icon: '💨' },
+        { name: 'JavaScript', icon: 'JS' },
+        { name: 'TypeScript', icon: 'TS' },
         { name: 'React', icon: '⚛️' },
         { name: 'Next.js', icon: '▲' },
-        { name: 'TypeScript', icon: 'TS' },
-        { name: 'Tailwind', icon: '🎨' },
+        { name: 'Three.js', icon: '🔺' },
+        { name: 'Express.js', icon: '📦' },
         { name: 'Node.js', icon: '⬢' },
-        { name: 'Python', icon: '🐍' },
-        { name: 'PostgreSQL', icon: '🐘' },
+        { name: 'MySQL', icon: '🗄️' },
         { name: 'MongoDB', icon: '🍃' },
-        { name: 'TensorFlow', icon: 'TF' },
-        { name: 'PyTorch', icon: '🔥' },
-        { name: 'AWS', icon: '☁️' },
-        { name: 'Docker', icon: '🐳' },
+        { name: 'PostgreSQL', icon: '🐘' },
+        { name: 'Prisma', icon: '◇' },
+        { name: 'Python', icon: '🐍' },
+        { name: 'C++', icon: '⧺' },
         { name: 'Git', icon: '⎇' },
         { name: 'Figma', icon: '🎯' },
+        { name: 'Matplotlib', icon: '📊' },
+        { name: 'NumPy', icon: '🔢' },
+        { name: 'Pandas', icon: '🐼' },
     ];
 
     const containerVariants = {
@@ -237,9 +245,7 @@ const About = () => {
                                     margin: 0,
                                 }}
                             >
-                                I'm <span style={{ color: '#ffffff' }}>Meghna Nair</span> — a full-stack developer and
-                                AI/ML engineer who obsesses over clean code and scalable architecture.
-                                I don't just build features; I craft systems that are elegant under the hood.
+                                I'm <span style={{ color: '#ffffff' }}>Meghna Nair</span> — a full-stack developer specializing in the MERN stack, currently honing my craft in building production-grade web applications. I bring strong algorithmic thinking to every solution I architect, focusing on clean code and scalable system design. Driven by curiosity and a commitment to continuous growth, I'm mastering end-to-end development while actively exploring the <span style={{ color: '#E63946' }}>AI/ML landscape</span>.
                             </p>
                             <p
                                 style={{
