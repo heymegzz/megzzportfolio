@@ -1,57 +1,63 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, Github, Linkedin, ArrowUpRight, Copy, Check } from 'lucide-react';
+import { Send, Github, Linkedin, Instagram, Mail, MapPin } from 'lucide-react';
 
 const Contact = () => {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-    const [copied, setCopied] = React.useState(false);
+    const [formState, setFormState] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null);
 
-    const email = 'meghna@example.com'; // User will update this
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus(null);
 
-    const handleCopyEmail = () => {
-        navigator.clipboard.writeText(email);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        try {
+            const response = await fetch('/api/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formState),
+            });
+
+            if (response.ok) {
+                setSubmitStatus('success');
+                setFormState({ name: '', email: '', message: '' });
+            } else {
+                setSubmitStatus('error');
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
+            setTimeout(() => setSubmitStatus(null), 5000);
+        }
     };
 
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2,
-            },
-        },
+            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+        }
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-        },
+            transition: { duration: 0.5 }
+        }
     };
-
-    const socialLinks = [
-        {
-            name: 'GitHub',
-            url: 'https://github.com/heymegzz',
-            icon: Github,
-        },
-        {
-            name: 'LinkedIn',
-            url: 'https://www.linkedin.com/in/meghna-nair-159458227/',
-            icon: Linkedin,
-        },
-        {
-            name: 'LeetCode',
-            url: 'https://leetcode.com/u/heymegzz/',
-            icon: null, // Custom SVG
-        },
-    ];
 
     return (
         <section
@@ -64,290 +70,298 @@ const Contact = () => {
                 backgroundColor: '#050505',
                 color: '#ffffff',
                 overflow: 'hidden',
+                padding: '120px 0',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'center'
             }}
         >
-            {/* Grid background */}
+            {/* Background Effects */}
             <div
                 style={{
                     position: 'absolute',
                     inset: 0,
-                    backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-                    backgroundSize: '50px 50px',
+                    backgroundImage: 'radial-gradient(circle at 50% 100%, #1a1a1a 1px, transparent 1px)',
+                    backgroundSize: '30px 30px',
+                    opacity: 0.2,
                     pointerEvents: 'none',
                 }}
             />
-
-            {/* Accent glow - centered */}
             <div
                 style={{
                     position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '600px',
-                    height: '600px',
+                    bottom: '0%',
+                    left: '20%',
+                    width: '500px',
+                    height: '500px',
                     borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(230,57,70,0.08) 0%, transparent 60%)',
-                    filter: 'blur(100px)',
+                    background: 'radial-gradient(circle, rgba(230,57,70,0.05) 0%, transparent 70%)',
+                    filter: 'blur(80px)',
                     pointerEvents: 'none',
                 }}
             />
 
-            {/* Main Container */}
-            <div
-                style={{
-                    maxWidth: '1000px',
-                    margin: '0 auto',
-                    padding: '120px 48px',
-                    position: 'relative',
-                    zIndex: 10,
-                    width: '100%',
-                }}
-            >
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', width: '100%', position: 'relative', zIndex: 10 }}>
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                     style={{
-                        textAlign: 'center',
+                        display: 'grid',
+                        gridTemplateColumns: 'minmax(300px, 1fr) minmax(300px, 1.5fr)',
+                        gap: '64px',
+                        alignItems: 'start'
                     }}
                 >
-                    {/* Section Label */}
+                    {/* Left Column: Info */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+                        <motion.div variants={itemVariants}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+                                <div style={{ width: '40px', height: '1px', backgroundColor: '#E63946' }} />
+                                <span style={{ fontFamily: '"JetBrains Mono", monospace', color: '#E63946', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                                    Get in Touch
+                                </span>
+                            </div>
+                            <h2 style={{ fontFamily: '"Syne", sans-serif', fontSize: '48px', fontWeight: 700, lineHeight: 1.1, marginBottom: '24px' }}>
+                                Let's build something <br />
+                                <span style={{ color: '#E63946' }}>extraordinary</span>.
+                            </h2>
+                            <p style={{ color: '#9ca3af', lineHeight: 1.8, fontSize: '16px', fontFamily: '"Inter", sans-serif' }}>
+                                Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and ideas.
+                            </p>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E63946' }}>
+                                    <Mail size={18} />
+                                </div>
+                                <div>
+                                    <div style={{ fontSize: '11px', color: '#6b7280', fontFamily: '"JetBrains Mono", monospace', marginBottom: '4px' }}>EMAIL</div>
+                                    <a href="mailto:meghnaofficial66@gmail.com" style={{ color: '#fff', textDecoration: 'none', fontSize: '16px', transition: 'color 0.2s' }} className="hover:text-accent">
+                                        meghnaofficial66@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E63946' }}>
+                                    <MapPin size={18} />
+                                </div>
+                                <div>
+                                    <div style={{ fontSize: '11px', color: '#6b7280', fontFamily: '"JetBrains Mono", monospace', marginBottom: '4px' }}>LOCATION</div>
+                                    <div style={{ color: '#fff', fontSize: '16px' }}>Jaipur, India</div>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
+                                <div style={{ fontSize: '11px', color: '#6b7280', fontFamily: '"JetBrains Mono", monospace' }}>SOCIALS</div>
+                                <div style={{ display: 'flex', gap: '16px' }}>
+                                    {[
+                                        { icon: Github, href: 'https://github.com/heymegzz' },
+                                        { icon: Linkedin, href: 'https://linkedin.com/in/heymegzz' },
+                                        { icon: Instagram, href: 'https://www.instagram.com/heymegzz/' }
+                                    ].map((Social, index) => (
+                                        <a
+                                            key={index}
+                                            href={Social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{
+                                                width: '40px',
+                                                height: '40px',
+                                                borderRadius: '50%',
+                                                border: '1px solid rgba(255,255,255,0.1)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: '#fff',
+                                                transition: 'all 0.3s ease',
+                                                cursor: 'pointer'
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.borderColor = '#E63946';
+                                                e.currentTarget.style.background = 'rgba(230,57,70,0.1)';
+                                                e.currentTarget.style.color = '#E63946';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                                                e.currentTarget.style.background = 'transparent';
+                                                e.currentTarget.style.color = '#fff';
+                                            }}
+                                        >
+                                            <Social.icon size={18} />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Column: Form */}
                     <motion.div
                         variants={itemVariants}
                         style={{
+                            background: 'rgba(255,255,255,0.02)',
+                            backdropFilter: 'blur(10px)',
+                            border: '1px solid rgba(255,255,255,0.05)',
+                            padding: '48px',
+                            borderRadius: '16px',
+                            position: 'relative'
+                        }}
+                    >
+                        {/* Badge */}
+                        <div style={{
+                            position: 'absolute',
+                            top: '24px',
+                            right: '24px',
+                            background: 'rgba(230,57,70,0.1)',
+                            border: '1px solid rgba(230,57,70,0.2)',
+                            color: '#E63946',
+                            padding: '6px 12px',
+                            borderRadius: '100px',
+                            fontSize: '10px',
+                            fontFamily: '"JetBrains Mono", monospace',
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '16px',
-                            marginBottom: '48px',
-                        }}
-                    >
-                        <div
-                            style={{
-                                width: '40px',
-                                height: '1px',
-                                backgroundColor: '#E63946',
-                            }}
-                        />
-                        <span
-                            style={{
-                                fontFamily: '"JetBrains Mono", monospace',
-                                fontSize: '11px',
-                                color: '#E63946',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.25em',
-                            }}
-                        >
-                            Get In Touch
-                        </span>
-                        <div
-                            style={{
-                                width: '40px',
-                                height: '1px',
-                                backgroundColor: '#E63946',
-                            }}
-                        />
-                    </motion.div>
+                            gap: '6px'
+                        }}>
+                            <span style={{ width: '6px', height: '6px', background: '#E63946', borderRadius: '50%', display: 'block', animation: 'pulse 2s infinite' }}></span>
+                            OPEN TO WORK
+                        </div>
+                        <style>{`
+                            @keyframes pulse {
+                                0% { box-shadow: 0 0 0 0 rgba(230,57,70, 0.4); }
+                                70% { box-shadow: 0 0 0 6px rgba(230,57,70, 0); }
+                                100% { box-shadow: 0 0 0 0 rgba(230,57,70, 0); }
+                            }
+                        `}</style>
 
-                    {/* Main Headline */}
-                    <motion.h2
-                        variants={itemVariants}
-                        style={{
-                            fontFamily: '"Syne", sans-serif',
-                            fontSize: 'clamp(36px, 6vw, 72px)',
-                            fontWeight: 700,
-                            letterSpacing: '-0.03em',
-                            lineHeight: 1.1,
-                            margin: '0 0 32px 0',
-                        }}
-                    >
-                        Let's build
-                        <br />
-                        <span style={{ color: '#E63946' }}>something great</span>
-                    </motion.h2>
 
-                    {/* Subtext */}
-                    <motion.p
-                        variants={itemVariants}
-                        style={{
-                            fontFamily: '"Inter", sans-serif',
-                            fontSize: '17px',
-                            lineHeight: 1.7,
-                            color: '#9ca3af',
-                            maxWidth: '500px',
-                            margin: '0 auto 56px auto',
-                        }}
-                    >
-                        Currently open to internship opportunities.
-                        If you're working on something interesting, I'd love to hear about it.
-                    </motion.p>
+                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '24px' }}>
+                            <div>
+                                <label style={{ display: 'block', fontFamily: '"JetBrains Mono", monospace', fontSize: '11px', color: '#6b7280', marginBottom: '8px', textTransform: 'uppercase' }}>Name</label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={formState.name}
+                                    onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
+                                    style={{
+                                        width: '100%',
+                                        background: 'rgba(255,255,255,0.03)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        padding: '16px',
+                                        borderRadius: '8px',
+                                        color: '#fff',
+                                        fontFamily: '"Inter", sans-serif',
+                                        fontSize: '15px',
+                                        outline: 'none',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    className="focus:border-accent focus:bg-white/5"
+                                    placeholder="John Doe"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', fontFamily: '"JetBrains Mono", monospace', fontSize: '11px', color: '#6b7280', marginBottom: '8px', textTransform: 'uppercase' }}>Email</label>
+                                <input
+                                    type="email"
+                                    required
+                                    value={formState.email}
+                                    onChange={(e) => setFormState(prev => ({ ...prev, email: e.target.value }))}
+                                    style={{
+                                        width: '100%',
+                                        background: 'rgba(255,255,255,0.03)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        padding: '16px',
+                                        borderRadius: '8px',
+                                        color: '#fff',
+                                        fontFamily: '"Inter", sans-serif',
+                                        fontSize: '15px',
+                                        outline: 'none',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    className="focus:border-accent focus:bg-white/5"
+                                    placeholder="john@example.com"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', fontFamily: '"JetBrains Mono", monospace', fontSize: '11px', color: '#6b7280', marginBottom: '8px', textTransform: 'uppercase' }}>Message</label>
+                                <textarea
+                                    required
+                                    value={formState.message}
+                                    onChange={(e) => setFormState(prev => ({ ...prev, message: e.target.value }))}
+                                    rows={5}
+                                    style={{
+                                        width: '100%',
+                                        background: 'rgba(255,255,255,0.03)',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        padding: '16px',
+                                        borderRadius: '8px',
+                                        color: '#fff',
+                                        fontFamily: '"Inter", sans-serif',
+                                        fontSize: '15px',
+                                        outline: 'none',
+                                        resize: 'vertical',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    className="focus:border-accent focus:bg-white/5"
+                                    placeholder="Tell me about your project..."
+                                />
+                            </div>
 
-                    {/* Email CTA */}
-                    <motion.div
-                        variants={itemVariants}
-                        style={{
-                            marginBottom: '64px',
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '16px',
-                                padding: '20px 32px',
-                                border: '1px solid rgba(255,255,255,0.1)',
-                                borderRadius: '8px',
-                                backgroundColor: 'rgba(255,255,255,0.02)',
-                            }}
-                        >
-                            <Mail size={20} style={{ color: '#E63946' }} />
-                            <a
-                                href={`mailto:${email}`}
-                                style={{
-                                    fontFamily: '"JetBrains Mono", monospace',
-                                    fontSize: '16px',
-                                    color: '#ffffff',
-                                    textDecoration: 'none',
-                                    letterSpacing: '0.02em',
-                                }}
-                            >
-                                {email}
-                            </a>
                             <button
-                                onClick={handleCopyEmail}
+                                type="submit"
+                                disabled={isSubmitting}
                                 style={{
+                                    background: '#E63946',
+                                    color: '#fff',
+                                    border: 'none',
+                                    padding: '16px',
+                                    borderRadius: '8px',
+                                    fontFamily: '"Syne", sans-serif',
+                                    fontWeight: 700,
+                                    fontSize: '16px',
+                                    cursor: isSubmitting ? 'wait' : 'pointer',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    width: '32px',
-                                    height: '32px',
-                                    borderRadius: '4px',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    backgroundColor: 'transparent',
-                                    color: '#6b7280',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.3s ease',
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.color = '#ffffff';
-                                    e.currentTarget.style.borderColor = '#E63946';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = '#6b7280';
-                                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                                }}
-                                title="Copy email"
-                            >
-                                {copied ? <Check size={14} /> : <Copy size={14} />}
-                            </button>
-                        </div>
-                    </motion.div>
-
-                    {/* Divider */}
-                    <motion.div
-                        variants={itemVariants}
-                        style={{
-                            width: '60px',
-                            height: '1px',
-                            backgroundColor: 'rgba(255,255,255,0.1)',
-                            margin: '0 auto 48px auto',
-                        }}
-                    />
-
-                    {/* Social Links */}
-                    <motion.div
-                        variants={itemVariants}
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            gap: '32px',
-                            marginBottom: '80px',
-                        }}
-                    >
-                        {socialLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
                                     gap: '8px',
-                                    fontFamily: '"JetBrains Mono", monospace',
-                                    fontSize: '12px',
-                                    color: '#6b7280',
-                                    textDecoration: 'none',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.1em',
-                                    transition: 'color 0.3s ease',
+                                    transition: 'all 0.3s ease',
+                                    marginTop: '8px'
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.color = '#E63946'}
-                                onMouseLeave={(e) => e.currentTarget.style.color = '#6b7280'}
+                                className="hover:bg-red-600 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                                {link.icon ? (
-                                    <link.icon size={16} />
-                                ) : (
-                                    // LeetCode custom icon
-                                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                                        <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z" />
-                                    </svg>
+                                {isSubmitting ? 'Sending...' : (
+                                    <>
+                                        Send Message
+                                        <Send size={18} />
+                                    </>
                                 )}
-                                {link.name}
-                            </a>
-                        ))}
-                    </motion.div>
+                            </button>
 
-                    {/* Footer */}
-                    <motion.div
-                        variants={itemVariants}
-                        style={{
-                            borderTop: '1px solid rgba(255,255,255,0.05)',
-                            paddingTop: '48px',
-                        }}
-                    >
-                        <p
-                            style={{
-                                fontFamily: '"JetBrains Mono", monospace',
-                                fontSize: '11px',
-                                color: '#4b5563',
-                                letterSpacing: '0.1em',
-                                margin: 0,
-                            }}
-                        >
-                            Designed & Built by <span style={{ color: '#9ca3af' }}>Meghna Nair</span>
-                        </p>
-                        <p
-                            style={{
-                                fontFamily: '"JetBrains Mono", monospace',
-                                fontSize: '10px',
-                                color: '#374151',
-                                letterSpacing: '0.1em',
-                                margin: '8px 0 0 0',
-                            }}
-                        >
-                            © {new Date().getFullYear()}
-                        </p>
+                            {submitStatus === 'success' && (
+                                <p style={{ color: '#4ade80', fontSize: '14px', textAlign: 'center', marginTop: '8px' }}>
+                                    Message sent successfully!
+                                </p>
+                            )}
+                            {submitStatus === 'error' && (
+                                <p style={{ color: '#ef4444', fontSize: '14px', textAlign: 'center', marginTop: '8px' }}>
+                                    Something went wrong. Please try again.
+                                </p>
+                            )}
+                        </form>
                     </motion.div>
                 </motion.div>
             </div>
 
-            {/* Responsive styles */}
             <style>{`
-                @media (max-width: 640px) {
-                    #contact > div {
-                        padding: 80px 24px !important;
+                @media (max-width: 900px) {
+                    #contact > div > div {
+                        grid-template-columns: 1fr !important;
+                        gap: 48px !important;
                     }
-                    #contact > div > div > div:nth-child(5) {
-                        flex-direction: column !important;
-                        gap: 12px !important;
-                    }
-                    #contact > div > div > div:nth-child(5) > div {
-                        flex-wrap: wrap !important;
-                        justify-content: center !important;
+                    #contact .tech-spec-box {
+                        margin-top: 48px;
                     }
                 }
             `}</style>
