@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Loader from './components/ui/Loader';
 import Navbar from './components/layout/Navbar';
 import Hero from './components/sections/Hero';
+import About from './components/sections/About';
 import CustomCursor from './components/ui/CustomCursor';
 import { AnimatePresence } from 'framer-motion';
 
@@ -36,11 +37,7 @@ function App() {
         <main className="bg-primary min-h-screen selection:bg-accent selection:text-white">
           <Navbar />
           <Hero />
-
-          {/* Placeholder for future sections to allow scrolling */}
-          <div className="h-screen flex items-center justify-center text-text-secondary border-t border-white/5">
-            <p className="font-mono text-sm">More content coming soon...</p>
-          </div>
+          <About />
         </main>
       )}
     </>
