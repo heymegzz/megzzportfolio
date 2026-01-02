@@ -1,7 +1,5 @@
 # Meghna Nair — Portfolio
 
-![Portfolio Preview](/public/peernova.png) {/* ideally we'd have a hero shot here, but using what we have */}
-
 > A high-performance, immersive portfolio website built to showcase production-grade full-stack applications and AI/ML research.
 
 ## 🚀 Overview
