@@ -13,7 +13,7 @@ const Navbar = () => {
         <motion.header
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 2.5, duration: 0.6 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
             className="fixed top-0 left-0 right-0 z-40 px-6 md:px-12 py-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-white/5"
         >
             {/* Logo */}

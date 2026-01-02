@@ -22,7 +22,7 @@ function App() {
     // Failsafe: Force load after 3 seconds if loader hangs
     const failsafe = setTimeout(() => {
       if (loading) setLoading(false);
-    }, 3000);
+    }, 3500);
 
     return () => clearTimeout(failsafe);
   }, [loading]);

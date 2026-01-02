@@ -191,11 +191,10 @@ const Hero = () => {
 
             <div style={contentStyle}>
 
-                {/* Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2.1, duration: 0.6 }}
+                    transition={{ delay: 0.1, duration: 0.6 }}
                     style={badgeStyle}
                 >
                     <span style={dotOuterStyle}>
@@ -209,7 +208,7 @@ const Hero = () => {
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2.2, duration: 0.8 }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
                     style={nameStyle}
                 >
                     MEGHNA NAIR
@@ -219,7 +218,7 @@ const Hero = () => {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 2.5, duration: 0.8 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
                     style={bioContainerStyle}
                 >
                     <p style={bioLine1Style}>
@@ -234,7 +233,7 @@ const Hero = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2.8, duration: 0.6 }}
+                    transition={{ delay: 0.6, duration: 0.6 }}
                     style={socialsContainerStyle}
                 >
                     <a href="https://github.com/heymegzz" target="_blank" rel="noopener noreferrer" title="GitHub"
@@ -288,7 +287,7 @@ const Hero = () => {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 3.2, duration: 1 }}
+                transition={{ delay: 0.8, duration: 1 }}
                 style={scrollStyle}
             >
                 <span style={scrollTextStyle}>Scroll</span>
