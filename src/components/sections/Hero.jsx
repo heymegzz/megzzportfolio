@@ -244,7 +244,7 @@ const Hero = () => {
                         <Github size={22} />
                     </a>
 
-                    <a href="https://leetcode.com/u/heymegzz/" target="_blank" rel="noopener noreferrer" title="LeetCode"
+                    <a href="https://leetcode.com/u/megzzlockin/" target="_blank" rel="noopener noreferrer" title="LeetCode"
                         style={socialLinkStyle}
                         onMouseEnter={(e) => handleHover(e, true)}
                         onMouseLeave={(e) => handleHover(e, false)}
@@ -272,7 +272,7 @@ const Hero = () => {
                         <Linkedin size={22} />
                     </a>
 
-                    <a href="https://drive.google.com/file/d/1nJwR-5-uAqsIK13VEqj2RCdT01eeOwDE/view?usp=sharing" target="_blank" rel="noopener noreferrer" title="Resume"
+                    <a href="https://drive.google.com/file/d/1ufes2hLwhKnGdcx4VDXADINAZajFe5W2/view?usp=drive_link" target="_blank" rel="noopener noreferrer" title="Resume"
                         style={socialLinkStyle}
                         onMouseEnter={(e) => handleHover(e, true)}
                         onMouseLeave={(e) => handleHover(e, false)}
