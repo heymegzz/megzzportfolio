@@ -15,7 +15,6 @@ const About = () => {
         { name: 'TypeScript', icon: 'TS' },
         { name: 'React', icon: '⚛️' },
         { name: 'Next.js', icon: '▲' },
-        { name: 'Three.js', icon: '🔺' },
         { name: 'Express.js', icon: '📦' },
         { name: 'Node.js', icon: '⬢' },
         { name: 'MySQL', icon: '🗄️' },
@@ -29,6 +28,16 @@ const About = () => {
         { name: 'Matplotlib', icon: '📊' },
         { name: 'NumPy', icon: '🔢' },
         { name: 'Pandas', icon: '🐼' },
+        { name: 'FastAPI', icon: '⚡' },
+        { name: 'LangChain', icon: '🔗' },
+        { name: 'LangGraph', icon: '🕸️' },
+        { name: 'HuggingFace', icon: '🤗' },
+        { name: 'ChromaDB', icon: '🧠' },
+        { name: 'FAISS', icon: '🔍' },
+        { name: 'XGBoost', icon: '📈' },
+        { name: 'Streamlit', icon: '🎈' },
+        { name: 'Groq', icon: '⚡' },
+        { name: 'OpenAI API', icon: '🤖' },
     ];
 
     const containerVariants = {
@@ -176,9 +185,9 @@ const About = () => {
                             }}
                         >
                             {[
-                                { number: '500+', label: 'DSA Problems' },
-                                { number: '10+', label: 'Technologies' },
-                                { number: '3+', label: 'Years Coding' },
+                                { number: '400+', label: 'DSA Problems' },
+                                { number: '15+', label: 'Technologies' },
+                                { number: '3+', label: 'AI Projects' },
                             ].map((stat, i) => (
                                 <div
                                     key={stat.label}
@@ -245,7 +254,7 @@ const About = () => {
                                     margin: 0,
                                 }}
                             >
-                                I'm <span style={{ color: '#ffffff' }}>Meghna Nair</span> — a full-stack developer specializing in the MERN stack, currently honing my craft in building production-grade web applications. I bring strong algorithmic thinking to every solution I architect, focusing on clean code and scalable system design. Driven by curiosity and a commitment to continuous growth, I'm mastering end-to-end development while actively exploring the <span style={{ color: '#E63946' }}>AI/ML landscape</span>.
+                                I'm <span style={{ color: '#ffffff' }}>Meghna Nair</span> — a full-stack developer and AI engineer who builds systems that think. I work at the intersection of the MERN stack and agentic AI, shipping production-grade applications powered by LLMs, RAG pipelines, and multi-node LangGraph workflows. My edge is bridging the gap between raw model intelligence and real-world product utility — every project I ship is explainable, grounded in evidence, and built to handle failure gracefully. Sharp algorithmic instincts (400+ Codeforces problems, 1000+ rating) meet applied ML in everything I build.
                             </p>
                             <p
                                 style={{
@@ -256,9 +265,7 @@ const About = () => {
                                     margin: '20px 0 0 0',
                                 }}
                             >
-                                My approach? Start with the problem, not the solution. Whether it's optimizing
-                                algorithms for competitive programming or architecting ML pipelines, I believe
-                                the best code is the code you <span style={{ color: '#E63946' }}>don't have to write twice</span>.
+                                My philosophy: if the system can't explain its own decision, it isn't ready to ship. Whether I'm orchestrating LLM agents with structured JSON output or designing fraud detection pipelines with <span style={{ color: '#E63946' }}>SHAP explainability</span>, I hold every layer of the stack to the same standard — clarity, reliability, and real impact.
                             </p>
                         </motion.div>
 
@@ -286,10 +293,10 @@ const About = () => {
                                 Currently focused on
                             </span>
                             {[
-                                'Building production-ready web applications',
-                                'Competitive programming & algorithmic thinking',
-                                'Deep learning & computer vision research',
-                                'System design & distributed architectures',
+                                'Building agentic AI systems with LangGraph and LLMs',
+                                'RAG pipelines with ChromaDB, FAISS and vector search',
+                                'Full-stack ML deployment with FastAPI and React',
+                                'Competitive programming and system design',
                             ].map((focus, i) => (
                                 <motion.div
                                     key={focus}

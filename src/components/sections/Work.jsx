@@ -10,6 +10,39 @@ const Work = () => {
     const projects = [
         {
             id: 1,
+            title: 'Earmark.ai',
+            description: 'Fraud detection platform combining XGBoost and Isolation Forest with SHAP TreeExplainer to generate feature-level explainability for every flagged transaction, achieving AUC above 0.90 on imbalanced financial data. Powered by a 3-node LangGraph agent with ChromaDB RAG retrieval and Groq LLaMA 3.1 that auto-generates plain-English compliance audit reports grounded in retrieved fraud evidence.',
+            tech: ['FastAPI', 'React', 'XGBoost', 'LangGraph', 'ChromaDB', 'SHAP', 'Groq'],
+            liveUrl: 'https://earmark-ai.vercel.app/',
+            githubUrl: 'https://github.com/heymegzz/earmark.ai',
+            year: '2026',
+            category: 'AI/ML',
+            image: '/earmark.png',
+        },
+        {
+            id: 2,
+            title: 'Autopsy-AI',
+            description: 'Startup failure analysis engine using LLaMA 3 70B via Groq that classifies startup deaths across 8 failure taxonomies with deterministic JSON output. Built a 5-node LangGraph workflow handling cause classification, event extraction, dimensional scoring, and verdict generation — scoring each startup across 5 quantitative dimensions on a 1-10 scale with dual-retrieval grounding via ChromaDB and live Tavily web search.',
+            tech: ['LangGraph', 'LLaMA 3 70B', 'ChromaDB', 'Groq', 'Pydantic', 'Tavily'],
+            liveUrl: 'https://autopsy-ai-eight.vercel.app/',
+            githubUrl: 'https://github.com/heymegzz/autopsy-ai',
+            year: '2026',
+            category: 'Agentic AI',
+            image: '/autopsy.png',
+        },
+        {
+            id: 3,
+            title: 'ChurnIQ',
+            description: 'Agentic AI platform to predict and prevent player churn using a Random Forest classifier on behavioral data, with LangGraph orchestrating a multi-node workflow for dynamic retention blueprint generation. Implements a RAG pipeline using FAISS and HuggingFace local embeddings with Groq LLaMA 3.1, deployed as an interactive multi-tab Streamlit dashboard with live dataset exploration and real-time model training.',
+            tech: ['LangGraph', 'FAISS', 'HuggingFace', 'Groq', 'Streamlit', 'Sklearn'],
+            liveUrl: 'https://churniq-bxfx3ucjbzptzd6ayupadj.streamlit.app/',
+            githubUrl: 'https://github.com/VanshSharma88/ChurnIQ',
+            year: '2026',
+            category: 'Agentic AI',
+            image: '/churniq.png',
+        },
+        {
+            id: 4,
             title: 'PeerNova',
             description: 'Enterprise campus platform built for 1,000+ concurrent users — enabling study groups, resource sharing, and real-time collaboration. Features JWT auth, role-based access, TanStack Query reducing API calls by 70%, and Zustand state persistence with offline support.',
             tech: ['React 19', 'Node.js', 'Express', 'MySQL', 'Prisma', 'Tailwind'],
@@ -161,7 +194,7 @@ const Work = () => {
                                 letterSpacing: '0.1em',
                             }}
                         >
-                            01 Projects
+                            {`${String(projects.length).padStart(2, '0')} Projects`}
                         </div>
                     </motion.div>
 
@@ -334,46 +367,50 @@ const Work = () => {
                                                 gap: '16px',
                                             }}
                                         >
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '6px',
-                                                    fontFamily: '"JetBrains Mono", monospace',
-                                                    fontSize: '11px',
-                                                    color: '#9ca3af',
-                                                    textDecoration: 'none',
-                                                    transition: 'color 0.3s ease',
-                                                }}
-                                                onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
-                                                onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
-                                            >
-                                                <Github size={14} />
-                                                Code
-                                            </a>
-                                            <a
-                                                href={project.liveUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '6px',
-                                                    fontFamily: '"JetBrains Mono", monospace',
-                                                    fontSize: '11px',
-                                                    color: '#9ca3af',
-                                                    textDecoration: 'none',
-                                                    transition: 'color 0.3s ease',
-                                                }}
-                                                onMouseEnter={(e) => e.currentTarget.style.color = '#E63946'}
-                                                onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
-                                            >
-                                                <ExternalLink size={14} />
-                                                Live
-                                            </a>
+                                            {project.githubUrl !== '#' && (
+                                                <a
+                                                    href={project.githubUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '6px',
+                                                        fontFamily: '"JetBrains Mono", monospace',
+                                                        fontSize: '11px',
+                                                        color: '#9ca3af',
+                                                        textDecoration: 'none',
+                                                        transition: 'color 0.3s ease',
+                                                    }}
+                                                    onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
+                                                    onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
+                                                >
+                                                    <Github size={14} />
+                                                    Code
+                                                </a>
+                                            )}
+                                            {project.liveUrl !== '#' && (
+                                                <a
+                                                    href={project.liveUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '6px',
+                                                        fontFamily: '"JetBrains Mono", monospace',
+                                                        fontSize: '11px',
+                                                        color: '#9ca3af',
+                                                        textDecoration: 'none',
+                                                        transition: 'color 0.3s ease',
+                                                    }}
+                                                    onMouseEnter={(e) => e.currentTarget.style.color = '#E63946'}
+                                                    onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
+                                                >
+                                                    <ExternalLink size={14} />
+                                                    Live
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -468,6 +505,31 @@ const Work = () => {
                             </motion.article>
                         ))}
                     </div>
+
+                    {/* Achievements */}
+                    <motion.div
+                        variants={itemVariants}
+                        style={{
+                            marginTop: '64px',
+                            padding: '32px 40px',
+                            border: '1px solid rgba(255,255,255,0.08)',
+                            borderRadius: '8px',
+                            background: 'rgba(255,255,255,0.02)',
+                        }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+                            <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '11px', color: '#E63946', textTransform: 'uppercase', letterSpacing: '0.25em' }}>Recognition</span>
+                            <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.08)' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
+                            <span style={{ fontFamily: '"Syne", sans-serif', fontSize: '32px', fontWeight: 700, color: '#E63946', lineHeight: 1 }}>🏆</span>
+                            <div>
+                                <p style={{ fontFamily: '"Syne", sans-serif', fontSize: '18px', fontWeight: 700, color: '#ffffff', margin: '0 0 6px 0' }}>3rd Place — Product Management Hackathon</p>
+                                <p style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '11px', color: '#6b7280', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>ProdG × Cognizance, IIT Roorkee · March 2026</p>
+                                <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '14px', color: '#9ca3af', margin: 0, lineHeight: 1.7 }}>Designed and prototyped a consequence-aware notification system bridging the gap between receiving a critical alert and actually acting on it.</p>
+                            </div>
+                        </div>
+                    </motion.div>
 
                     {/* More Projects CTA */}
                     <motion.div
