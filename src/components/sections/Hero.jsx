@@ -244,7 +244,7 @@ const Hero = () => {
                         <Github size={22} />
                     </a>
 
-                    <a href="https://leetcode.com/u/lifesuckseitherway/" target="_blank" rel="noopener noreferrer" title="LeetCode"
+                    <a href="https://leetcode.com/u/heymegzz/" target="_blank" rel="noopener noreferrer" title="LeetCode"
                         style={socialLinkStyle}
                         onMouseEnter={(e) => handleHover(e, true)}
                         onMouseLeave={(e) => handleHover(e, false)}
