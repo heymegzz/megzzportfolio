@@ -2,13 +2,13 @@
 
 > A high-performance, immersive portfolio website built to showcase production-grade full-stack applications and AI/ML research.
 
-## 🚀 Overview
+##  Overview
 
 This portfolio is engineered to be more than just a static showcase—it's a demonstration of modern web capabilities. Built with **React 19** and **Vite**, it features fluid animations, serverless backend integration, and a premium "dark mode" aesthetic designed to capture attention immediately.
 
 The architecture emphasizes **performance** (via optimized assets and code-splitting) and **user experience** (custom cursor interactions, smooth scroll, and micro-animations).
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### Core
 - **Framework**: React 18+ (Vite)
@@ -21,7 +21,7 @@ The architecture emphasizes **performance** (via optimized assets and code-split
 - **Email**: Resend API
 - **Direct Database**: (Ready for PostgreSQL/Prisma integration)
 
-## ✨ Key Features
+##  Key Features
 
 - **Immersive Loader**: Custom-built initial loading sequence with state management.
 - **3D Project Mockups**: Interactive, perspective-tilted browser visualizations for project showcases.
@@ -29,7 +29,7 @@ The architecture emphasizes **performance** (via optimized assets and code-split
 - **Responsive Design**: Fluid layout that adapts seamlessly from 320px mobile to 4k desktop.
 - **Performance Optimized**: Lazy loading, optimized assets, and sub-second Time to Interactive (TTI).
 
-## ⚡️ Getting Started
+##  Getting Started
 
 To run this project locally:
 
@@ -55,7 +55,7 @@ To run this project locally:
     npm run dev
     ```
 
-## 📫 Contact
+##  Contact
 
 - **Email**: meghnaofficial66@gmail.com
 - **LinkedIn**: [linkedin.com/in/meghna-nair-159458227](https://linkedin.com/in/meghna-nair-159458227)
