@@ -1,51 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Loader from './components/ui/Loader';
-import Navbar from './components/layout/Navbar';
-import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Work from './components/sections/Work';
-import Contact from './components/sections/Contact';
-import CustomCursor from './components/ui/CustomCursor';
-import { AnimatePresence } from 'framer-motion';
+import Hero from './components/Hero/Hero'
+import CursorGlow from './components/CursorGlow/CursorGlow'
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Prevent scrolling during load
-    if (loading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    // Failsafe: Force load after 3 seconds if loader hangs
-    const failsafe = setTimeout(() => {
-      if (loading) setLoading(false);
-    }, 3500);
-
-    return () => clearTimeout(failsafe);
-  }, [loading]);
-
   return (
     <>
-      <CustomCursor />
-
-      <AnimatePresence mode="wait">
-        {loading && <Loader onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
-
-      {!loading && (
-        <main className="bg-primary min-h-screen selection:bg-accent selection:text-white">
-          <Navbar />
-          <Hero />
-          <About />
-          <Work />
-          <Contact />
-        </main>
-      )}
+      <CursorGlow />
+      <Hero />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
