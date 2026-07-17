@@ -7,18 +7,22 @@
     Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+@custom-variant dark (&:is(.dark *));
+
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+  }
+  
+  .dark {
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
   }
 
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1' stroke-dasharray='2,4'/%3E%3C/svg%3E");
-    background-size: 40px 40px;
-    background-position: calc(50% - 20px) top;
   }
 }
 

@@ -3,7 +3,6 @@
 import { useActiveSection } from "@/lib/hooks";
 
 const sections = [
-  { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },

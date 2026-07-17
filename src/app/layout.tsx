@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Doto } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,9 +14,15 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const doto = Doto({
+  subsets: ["latin"],
+  variable: "--font-doto",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Jane Doe | Full-Stack Developer",
-  description: "Portfolio of Jane Doe, a Full-Stack Developer & Designer specializing in AI tooling.",
+  title: "Meghna Nair",
+  description: "Portfolio of Meghna Nair, a Full-Stack AI & ML Engineer.",
 };
 
 export default function RootLayout({
@@ -27,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#09090b] text-[#fafafa] antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans bg-white text-zinc-950 dark:bg-black dark:text-zinc-50 antialiased transition-colors duration-300`}
       >
         {children}
       </body>

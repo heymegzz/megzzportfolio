@@ -1,7 +1,7 @@
 export interface SocialLink {
   label: string;
   href: string;
-  icon: string; // lucide icon name
+  icon: string;
 }
 
 export interface AchievementChip {
@@ -10,41 +10,32 @@ export interface AchievementChip {
 
 export interface HeroData {
   name: string;
-  age: number;
   role: string;
   location: string;
   availableForWork: boolean;
-  bioBullets: string[];
+  bioParagraphs: string[];
   socials: SocialLink[];
   chips: AchievementChip[];
   stats: { label: string; value: string }[];
 }
 
 export const heroData: HeroData = {
-  name: "Jane Doe",
-  age: 20,
-  role: "Engineer / Artist. I love building, breaking, and shipping things.",
-  location: "San Francisco, CA",
+  name: "Meghna Nair",
+  role: "Full-Stack AI & ML Engineer",
+  location: "India · Remote",
   availableForWork: true,
-  bioBullets: [
-    "AI, open source, and developer tools excite me.",
-    "I believe actions speak louder than words, so I put my code where my mouth is.",
-    "Currently building Next-gen UI and experimental AI tools."
+  bioParagraphs: [
+    "Curiosity over specialization. That's been my roadmap.",
+    "I move between AI, engineering, data, product, and algorithms without picking favorites. Every project is an excuse to learn something I didn't know yesterday.",
+    "Still experimenting. Still shipping. Still having fun.",
   ],
   socials: [
-    { label: "Email", href: "mailto:hello@example.com", icon: "Mail" },
-    { label: "GitHub", href: "https://github.com", icon: "Github" },
-    { label: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin" },
-    { label: "Resume", href: "/resume.pdf", icon: "FileText" },
+    { label: "Email", href: "mailto:meghnaofficial66@gmail.com", icon: "Mail" },
+    { label: "GitHub", href: "https://github.com/heymegzz", icon: "Github" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/meghna-nair-159458227/", icon: "Linkedin" },
+    { label: "LeetCode", href: "https://leetcode.com/u/heymegzz/", icon: "LeetCode" },
+    { label: "Codeforces", href: "https://codeforces.com/profile/heymegzz", icon: "Codeforces" },
   ],
-  chips: [
-    { label: "3x Hackathon Winner" },
-    { label: "OSS Contributor" },
-    { label: "Speaker @ DevConf 2025" },
-  ],
-  stats: [
-    { label: "Projects Shipped", value: "20+" },
-    { label: "GitHub Stars", value: "500+" },
-    { label: "Years Experience", value: "4+" },
-  ],
+  chips: [],
+  stats: [],
 };
