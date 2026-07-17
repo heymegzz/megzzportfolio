@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Mail, Sun, Moon, ArrowRight } from "lucide-react";
-import { Github, Linkedin, LeetCode, Codeforces, MapPin } from "@/components/Icons";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiLeetcode, SiCodeforces } from "react-icons/si";
+import { MapPin } from "@/components/Icons";
 import { heroData } from "@/data/hero";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 import { useState, useEffect } from "react";
@@ -17,10 +19,10 @@ const doto = Doto({
 
 const icons: Record<string, React.ElementType> = {
   Mail,
-  Github,
-  Linkedin,
-  LeetCode,
-  Codeforces,
+  Github: FaGithub,
+  Linkedin: FaLinkedin,
+  LeetCode: SiLeetcode,
+  Codeforces: SiCodeforces,
 };
 
 function useTimer() {

@@ -21,13 +21,13 @@ export interface HeroData {
 
 export const heroData: HeroData = {
   name: "Meghna Nair",
-  role: "Full-Stack AI & ML Engineer",
+  role: "Builder first. Everything else came from curiosity.",
   location: "India · Remote",
   availableForWork: true,
   bioParagraphs: [
-    "Curiosity over specialization. That's been my roadmap.",
-    "I move between AI, engineering, data, product, and algorithms without picking favorites. Every project is an excuse to learn something I didn't know yesterday.",
-    "Still experimenting. Still shipping. Still having fun.",
+    "Curiosity pulled me into AI, full-stack engineering, data, product thinking, and eventually competitive programming.",
+    "I enjoy building complete products, from models and backends to the interfaces people actually use.",
+    "Building one project after another until one changes everything.",
   ],
   socials: [
     { label: "Email", href: "mailto:meghnaofficial66@gmail.com", icon: "Mail" },
