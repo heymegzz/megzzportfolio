@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function GitHubActivity() {
   return (
-    <div className="py-8 w-full overflow-hidden">
+    <div className="py-8 w-full">
       <div className="flex items-baseline justify-between mb-4">
         <h2 className="text-[17px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
           GitHub Activity
@@ -22,17 +22,23 @@ export default function GitHubActivity() {
           </a>
         </div>
       </div>
-
-      <div className="overflow-x-auto pb-4 custom-scrollbar">
-        <div className="min-w-max p-4 rounded-xl border border-black/5 dark:border-white/5 bg-zinc-50 dark:bg-zinc-950">
+      <div className="pb-4">
+        <div className="w-full p-4 rounded-xl border border-black/5 dark:border-white/5 bg-zinc-50 dark:bg-zinc-950">
           <GitHubCalendar
             username="heymegzz"
-            blockSize={11}
-            blockMargin={3}
+            blockSize={12}
+            blockMargin={4}
             fontSize={12}
             theme={{
               light: ['#f0f0f0', '#d4d4d4', '#a3a3a3', '#737373', '#3f3f3f'],
-              dark: ['#1a1a1a', '#2d2d2d', '#4a4a4a', '#737373', '#d4d4d4'],
+              dark: ['#0f1111', '#1f2122', '#34363a', '#5a5c61', '#d4d4d4'],
+            }}
+            labels={{ totalCount: '{{count}} GitHub activities in the last year' }}
+            tooltips={{
+              activity: {
+                text: (activity: any) => `${activity.count} contributions on ${activity.date}`,
+                placement: 'top'
+              }
             }}
             style={{
               color: 'var(--foreground)',
