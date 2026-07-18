@@ -22,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full relative overflow-x-hidden">
+    <div className="min-h-screen w-full relative">
       {/* Sticky Sidebar (lg:block) */}
       <div className="fixed inset-0 z-50 pointer-events-none hidden lg:block" style={{ width: "calc(100vw - var(--removed-body-scroll-bar-size, 0px))" }}>
         <div className="absolute top-[22vh] left-[calc(69%+32px)] pointer-events-auto">

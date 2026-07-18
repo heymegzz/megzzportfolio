@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
+import SectionDivider from "@/components/SectionDivider";
 
 export default function Contact() {
   return (
-    <footer id="contact" className="py-16 px-10 scroll-mt-24 text-center">
+    <section id="contact" className="py-20 px-10 relative scroll-mt-24 text-center">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -26,6 +27,7 @@ export default function Contact() {
           </div>
         </motion.div>
       </motion.div>
-    </footer>
+      <SectionDivider />
+    </section>
   );
 }

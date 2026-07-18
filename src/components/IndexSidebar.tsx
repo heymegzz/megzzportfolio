@@ -3,43 +3,41 @@
 import { useActiveSection } from "@/lib/hooks";
 
 const sections = [
+  { id: "hero", label: "About" },
   { id: "projects", label: "Projects" },
-  { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
-  { id: "achievements", label: "Highlights" },
+  { id: "achievements", label: "Achievements" },
 ];
 
 export default function IndexSidebar() {
   const activeSection = useActiveSection(sections.map((s) => s.id));
 
   return (
-    <aside className="hidden lg:block w-[240px] shrink-0 sticky top-32 h-[calc(100vh-8rem)]">
-      <div className="flex flex-col space-y-6 px-10">
-        <h3 className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase ml-4">
-          INDEX
-        </h3>
-        <nav className="flex flex-col space-y-3">
-          {sections.map((section) => {
-            const isActive = activeSection === section.id;
-            return (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className={`group flex items-center text-xs font-medium transition-colors ${
-                  isActive ? "text-zinc-200" : "text-zinc-500 hover:text-zinc-300"
-                }`}
-              >
-                <span
-                  className={`inline-block mr-3 h-px bg-zinc-400 transition-all duration-300 ${
-                    isActive ? "w-4" : "w-0 group-hover:w-2"
-                  }`}
-                />
-                {section.label}
-              </a>
-            );
-          })}
-        </nav>
-      </div>
-    </aside>
+    <nav className="flex flex-col gap-4 mt-2">
+      <h3 className="text-[10px] font-bold tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase mb-1">
+        Index
+      </h3>
+      {sections.map((section) => {
+        const isActive = activeSection === section.id;
+        return (
+          <a
+            key={section.id}
+            href={`#${section.id}`}
+            className={`text-[12px] font-medium tracking-[0.05em] transition-all duration-300 ease-out flex items-center gap-3 ${
+              isActive
+                ? "text-zinc-800 dark:text-zinc-200"
+                : "text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400"
+            }`}
+          >
+            <span
+              className={`h-[1px] transition-all duration-300 ease-out ${
+                isActive ? "w-4 bg-zinc-800 dark:bg-zinc-200" : "w-0 bg-transparent"
+              }`}
+            />
+            {section.label}
+          </a>
+        );
+      })}
+    </nav>
   );
 }

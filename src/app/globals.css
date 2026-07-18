@@ -20,9 +20,22 @@
     --foreground: 0 0% 98%;
   }
 
+  html {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    overflow-x: hidden;
+  }
+
+  /* Skip layout/paint for off-screen sections — huge scroll perf win */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
   }
 }
 

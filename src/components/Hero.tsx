@@ -116,7 +116,7 @@ export default function Hero({ onOpenCommand }: { onOpenCommand?: () => void }) 
       </div>
 
       {/* BIO AND SOCIALS */}
-      <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-0 px-4 flex flex-col z-10 relative">
+      <div id="hero" className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-0 px-4 flex flex-col z-10 relative scroll-mt-32">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

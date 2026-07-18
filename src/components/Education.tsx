@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { educationData } from "@/data/education";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
+import SectionDivider from "@/components/SectionDivider";
 
 export default function Education() {
   return (
-    <section id="education" className="py-10 px-10 scroll-mt-24 border-b border-dashed border-white/10">
+    <section id="education" className="py-10 px-10 scroll-mt-24 relative">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -50,6 +51,7 @@ export default function Education() {
           ))}
         </div>
       </motion.div>
+      <SectionDivider />
     </section>
   );
 }
