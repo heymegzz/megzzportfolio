@@ -1,10 +1,10 @@
-export interface SocialLink {
+interface SocialLink {
   label: string;
   href: string;
   icon: string;
 }
 
-export interface AchievementChip {
+interface AchievementChip {
   label: string;
 }
 

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Globe, FileText } from "lucide-react";
+import { ArrowLeft, Globe, FileText } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { projectsData } from "@/data/projects";
 

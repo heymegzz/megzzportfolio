@@ -1,4 +1,4 @@
-export type TechIcon = {
+type TechIcon = {
   name: string;
   icon: string; // matches simple-icons name
 };

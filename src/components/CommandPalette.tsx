@@ -95,7 +95,7 @@ export default function CommandPalette({ onRegister }: CommandPaletteProps) {
                     }}
                     className="relative flex cursor-default select-none items-center rounded-sm px-2 py-2 text-sm text-zinc-200 outline-none aria-selected:bg-white/10 aria-selected:text-white mt-1"
                   >
-                    {project.title} <span className="ml-2 text-xs text-zinc-500">{project.category}</span>
+                    {project.title} <span className="ml-2 text-xs text-zinc-500">{project.status}</span>
                   </Command.Item>
                 ))}
               </Command.Group>

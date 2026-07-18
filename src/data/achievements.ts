@@ -1,4 +1,4 @@
-export interface AchievementItem {
+interface AchievementItem {
   year: string;
   title: string;
   result: string;
