@@ -4,7 +4,6 @@ import { useCallback, useRef } from "react";
 import IndexSidebar from "@/components/IndexSidebar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
-import Education from "@/components/Education";
 import Skills from "@/components/Skills";
 import Achievements from "@/components/Achievements";
 import Contact from "@/components/Contact";
@@ -54,7 +53,6 @@ export default function Home() {
       {/* MAIN CONTENT */}
       <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pb-0 px-4 flex flex-col z-10 relative">
         <Projects />
-        <Education />
         <Skills />
         <Achievements />
         <Contact />
