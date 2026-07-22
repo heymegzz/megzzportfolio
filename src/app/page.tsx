@@ -1,64 +1,469 @@
-"use client";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { GithubGraph } from "@/components/GithubGraph";
+import { CurrentTime } from "@/components/CurrentTime";
+import { ProjectsGrid } from "@/components/ProjectsGrid";
+import { ExperienceList } from "@/components/ExperienceList";
+import { OpenSourceContributions } from "@/components/OpenSourceContributions";
+import { BlogList } from "@/components/BlogList";
+import { Highlights } from "@/components/Highlights";
+import { FooterBackground } from "@/components/FooterBackground";
+import { RightNavbar } from "@/components/RightNavbar";
+import { CommandMenu } from "@/components/command-menu";
+import Link from "next/link";
+import SoftPillButton from "@/components/pixel-perfect/soft-pill-button";
+import SocialHoverCard from "@/components/pixel-perfect/social-hover-card";
 
-import { useCallback, useRef } from "react";
-import IndexSidebar from "@/components/IndexSidebar";
-import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
-import Skills from "@/components/Skills";
-import Achievements from "@/components/Achievements";
-import Contact from "@/components/Contact";
-import CommandPalette from "@/components/CommandPalette";
+import { FileText, MapPin } from "lucide-react";
+import Image from "next/image";
+
+const skills = [
+  { name: "C++", icon: "cplusplus" },
+  { name: "Python", icon: "python" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "SQL", icon: "databricks" },
+  { name: "HTML", icon: "html5" },
+  { name: "CSS", icon: "css" },
+  { name: "React", icon: "react" },
+  { name: "Next.js", icon: "nextdotjs" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
+  { name: "shadcn/ui", icon: "shadcnui" },
+  { name: "Zustand", icon: "https://raw.githubusercontent.com/pmndrs/zustand/main/docs/favicon.ico" },
+  { name: "TanStack Query", icon: "reactquery" },
+  { name: "Framer Motion", icon: "framer" },
+  { name: "GSAP", icon: "greensock" },
+  { name: "Node.js", icon: "nodedotjs" },
+  { name: "Express.js", icon: "express" },
+  { name: "FastAPI", icon: "fastapi" },
+  { name: "REST APIs", icon: "nodedotjs" },
+  { name: "WebSocket", icon: "socketdotio" },
+  { name: "JWT Authentication", icon: "jsonwebtokens" },
+  { name: "OAuth", icon: "auth0" },
+  { name: "PostgreSQL", icon: "postgresql" },
+  { name: "MongoDB", icon: "mongodb" },
+  { name: "Redis", icon: "redis" },
+  { name: "Prisma", icon: "prisma" },
+  { name: "Supabase", icon: "supabase" },
+  { name: "PyTorch", icon: "pytorch" },
+  { name: "TensorFlow", icon: "tensorflow" },
+  { name: "Scikit-learn", icon: "scikitlearn" },
+  { name: "XGBoost", icon: "databricks" },
+  { name: "LightGBM", icon: "databricks" },
+  { name: "NumPy", icon: "numpy" },
+  { name: "Pandas", icon: "pandas" },
+  { name: "Matplotlib", icon: "python" },
+  { name: "Seaborn", icon: "python" },
+  { name: "Data Cleaning & Preprocessing", icon: "databricks" },
+  { name: "Pydantic", icon: "pydantic" },
+  { name: "Transformers", icon: "huggingface" },
+  { name: "Hugging Face", icon: "huggingface" },
+  { name: "LangChain", icon: "langchain" },
+  { name: "LangGraph", icon: "langchain" },
+  { name: "RAG", icon: "meta" },
+  { name: "FAISS", icon: "meta" },
+  { name: "ChromaDB", icon: "databricks" },
+  { name: "vLLM", icon: "meta" },
+  { name: "Reinforcement Learning", icon: "huggingface" },
+  { name: "Graph Neural Networks", icon: "huggingface" },
+  { name: "Recommender Systems", icon: "huggingface" },
+  { name: "Git", icon: "git" },
+  { name: "GitHub", icon: "github" },
+  { name: "Docker", icon: "docker" },
+  { name: "Vercel", icon: "vercel" },
+  { name: "Postman", icon: "postman" },
+  { name: "Figma", icon: "figma" },
+];
 
 export default function Home() {
-  const openCommandRef = useRef<(() => void) | null>(null);
-
-  const handleRegister = useCallback((openFn: () => void) => {
-    openCommandRef.current = openFn;
-  }, []);
-
-  const handleOpenCommand = useCallback(() => {
-    openCommandRef.current?.();
-  }, []);
-
   return (
-    <div className="min-h-screen w-full relative">
-      {/* Sticky Sidebar (lg:block) */}
-      <div className="fixed inset-0 z-50 pointer-events-none hidden lg:block" style={{ width: "calc(100vw - var(--removed-body-scroll-bar-size, 0px))" }}>
-        <div className="absolute top-[22vh] left-[calc(69%+32px)] pointer-events-auto">
-          <IndexSidebar />
+    <div className="min-h-screen w-full bg-white dark:bg-black relative overflow-x-hidden transition-colors duration-300">
+
+      {/* Right Side Blueprint Navigation */}
+      <RightNavbar />
+
+      {/* Vertical Lines - Ultra-fine Micro Dots */}
+      <div className="absolute top-0 bottom-0 left-[30%] w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none hidden md:block" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+      <div className="absolute top-0 bottom-0 right-[30%] w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none hidden md:block" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+
+      {/* Horizontal Lines - Ultra-fine Micro Dots */}
+      <div className="absolute left-0 right-0 top-[22vh] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+      <div className="absolute left-0 right-0 top-[calc(22vh+112px)] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+
+      {/* Ultra-Tiny Solid Nodes */}
+      {[
+        { top: '22vh', left: '30%' },
+        { top: '22vh', right: '30%' },
+        { top: 'calc(22vh + 112px)', left: '30%' },
+        { top: 'calc(22vh + 112px)', right: '30%' },
+      ].map((pos, i) => (
+        <div key={i} className="absolute w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] pointer-events-none z-10 hidden md:block"
+          style={{
+            top: pos.top,
+            left: pos.left,
+            right: pos.right,
+            transform: `translate(${pos.right ? '50%' : '-50%'}, -50%)`
+          }} />
+      ))}
+
+      {/* Cell 1: Banner */}
+      <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-0 h-[22vh] -z-0 pointer-events-auto overflow-hidden bg-white dark:bg-black shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-[0_4px_12px_rgba(2,6,23,0.10)]">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/banner.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none z-[5] bg-gradient-to-t from-white/90 to-transparent dark:from-black/50 dark:to-transparent" />
+        <div className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none z-20 bg-gradient-to-r from-white/90 to-transparent dark:from-black/40 dark:to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-20 bg-gradient-to-l from-white/90 to-transparent dark:from-black/40 dark:to-transparent" />
+        <div className="absolute bottom-3 right-2 z-10 pointer-events-auto">
+          <CurrentTime />
         </div>
       </div>
 
-      {/* Vertical Lines */}
-      {/* Left line at 30% */}
-      <div className="absolute top-0 bottom-0 left-[30%] w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none hidden md:block" style={{ maskImage: "repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)", WebkitMaskImage: "repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)" }}></div>
-      {/* Right line at 30% from right */}
-      <div className="absolute top-0 bottom-0 right-[30%] w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none hidden md:block" style={{ maskImage: "repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)", WebkitMaskImage: "repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)" }}></div>
+      {/* Cell 2: Profile Section - 112px height to wrap the framed image (13px gap top/bottom) */}
+      <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-[22vh] h-[112px] flex items-center px-4 z-50">
+        <div className="flex w-full items-center justify-between">
 
-      {/* Horizontal Lines */}
-      {/* Top horizontal at 22vh */}
-      <div className="absolute left-0 right-0 top-[22vh] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: "repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)", WebkitMaskImage: "repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)" }}></div>
-      {/* Bottom horizontal at 22vh + 112px */}
-      <div className="absolute left-0 right-0 top-[calc(22vh+112px)] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: "repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)", WebkitMaskImage: "repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)" }}></div>
+          <div className="flex items-center gap-4 sm:gap-5">
+            <div className="relative p-[3px] rounded-[6px] sm:rounded-[8px] border-[1.5px] border-black/30 dark:border-white/[0.15] shrink-0">
+              {/* The inner image */}
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[3px] sm:rounded-[5px] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+                <Image
+                  src="/avatar.png"
+                  alt="Profile"
+                  width={240}
+                  height={240}
+                  quality={90}
+                  fetchPriority="high"
+                  sizes="(min-width: 640px) 120px, 96px"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
 
-      {/* Plus/Crosshairs at intersections */}
-      <div className="absolute w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] pointer-events-none z-10 hidden md:block" style={{ top: "22vh", left: "30%", transform: "translate(-50%, -50%)" }}></div>
-      <div className="absolute w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] pointer-events-none z-10 hidden md:block" style={{ top: "22vh", right: "30%", transform: "translate(50%, -50%)" }}></div>
-      <div className="absolute w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] pointer-events-none z-10 hidden md:block" style={{ top: "calc(22vh + 112px)", left: "30%", transform: "translate(-50%, -50%)" }}></div>
-      <div className="absolute w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] pointer-events-none z-10 hidden md:block" style={{ top: "calc(22vh + 112px)", right: "30%", transform: "translate(50%, -50%)" }}></div>
+            <div className="flex flex-col justify-center pt-8">
+              <h1 className="text-[20px] sm:text-[24px] font-bold text-zinc-800 dark:text-zinc-100 tracking-tight leading-none mb-0.5">
+                Meghna Nair
+              </h1>
+              <p className="text-[13px] sm:text-[14px] text-zinc-500 dark:text-zinc-400 flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> India · Remote</p>
+            </div>
+          </div>
 
-      {/* HERO (Banner + Avatar Row + Bio + Socials) */}
-      <Hero onOpenCommand={handleOpenCommand} />
+          <div className="flex items-start justify-end gap-2 sm:gap-3 h-20 sm:h-24 py-1">
+            <CommandMenu />
+            <ThemeToggle className="dark:text-zinc-400 hover:dark:text-zinc-300" />
+          </div>
 
-      {/* MAIN CONTENT */}
-      <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pb-0 px-4 flex flex-col z-10 relative">
-        <Projects />
-        <Skills />
-        <Achievements />
-        <Contact />
+        </div>
       </div>
-      
-      <CommandPalette onRegister={handleRegister} />
+
+      {/* Flowing Content Section */}
+      <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-0 px-4 flex flex-col z-10 relative min-h-screen">
+        <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-4">
+          Builder first. Everything else came from curiosity.
+        </p>
+
+        <ul className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-4 pl-4">
+          <li className="flex gap-1.5"><span>•</span><span>Curiosity pulled me into AI, full-stack engineering, data, product thinking, and eventually competitive programming.</span></li>
+          <li className="flex gap-1.5"><span>•</span><span>I enjoy building complete products, from models and backends to the interfaces people actually use.</span></li>
+          <li className="flex gap-1.5"><span>•</span><span>Building one project after another until one changes everything.</span></li>
+        </ul>
+
+        {/* Buttons */}
+        <div className="flex flex-wrap items-center gap-2 mt-4">
+          <Link href="/contact">
+            <SoftPillButton
+              as="span"
+              variant="primary"
+              className="px-3 py-1.5 !text-[12px]"
+            >
+              <div className="flex items-center gap-1.5">
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Book an intro call
+              </div>
+            </SoftPillButton>
+          </Link>
+          <a href="mailto:meghnaofficial66@gmail.com">
+            <SoftPillButton
+              as="span"
+              variant="secondary"
+              className="px-3 py-1.5 !text-[12px]"
+            >
+              <div className="flex items-center gap-1.5 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                Send an email
+              </div>
+            </SoftPillButton>
+          </a>
+        </div>
+
+        {/* Socials */}
+        <div id="contact" className="mt-6 scroll-mt-24">
+          <h2 className="text-[14px] text-zinc-500 mb-2">Here are my <span className="font-medium text-zinc-800 dark:text-zinc-200">socials</span></h2>
+          <div className="flex flex-wrap gap-1.5">
+            {[
+              { name: 'GitHub', href: 'https://github.com/heymegzz', icon: <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" strokeWidth="2" fill="none"></path> },
+              { name: 'LinkedIn', href: 'https://www.linkedin.com/in/meghna-nair-159458227/', icon: <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z" stroke="currentColor" strokeWidth="2" fill="none"></path> },
+              { name: 'LeetCode', href: 'https://leetcode.com/u/heymegzz/', icon: <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z" fill="currentColor" /> },
+              { name: 'Codeforces', href: 'https://codeforces.com/profile/heymegzz', icon: <path d="M4.5 7.5C5.328 7.5 6 8.172 6 9v10.5c0 .828-.672 1.5-1.5 1.5h-3C.672 21 0 20.328 0 19.5V9c0-.828.672-1.5 1.5-1.5h3zm9-4.5c.828 0 1.5.672 1.5 1.5v15c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5v-15c0-.828.672-1.5 1.5-1.5h3zm9 7.5c.828 0 1.5.672 1.5 1.5v7.5c0 .828-.672 1.5-1.5 1.5h-3c-.828 0-1.5-.672-1.5-1.5V12c0-.828.672-1.5 1.5-1.5h3z" fill="currentColor" /> },
+            ].map((social, i) => (
+              <SocialHoverCard key={i} socialName={social.name}>
+                <SoftPillButton
+                  as="a"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="secondary"
+                  className="px-3 py-1.5 !text-[12px]"
+                >
+                  <div className="flex items-center gap-1.5 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5">
+                      {social.icon}
+                    </svg>
+                    {social.name}
+                  </div>
+                </SoftPillButton>
+              </SocialHoverCard>
+            ))}
+          </div>
+        </div>
+
+        {/* Experiences */}
+        <div id="experience" className="mt-6 flex flex-col relative z-10 scroll-mt-24">
+          {/* Top full-width line */}
+          <div
+            className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none"
+            style={{
+              maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)',
+              WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)'
+            }}
+          />
+          {/* Top Line Intersections */}
+          <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+          <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+
+          <div className="py-2 relative">
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Experiences</h2>
+            {/* Bottom full-width line */}
+            <div
+              className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none"
+              style={{
+                maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)',
+                WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)'
+              }}
+            />
+            {/* Bottom Line Intersections */}
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+
+          <div className="block mt-0">
+            <ExperienceList />
+          </div>
+        </div>
+
+        {/* Projects */}
+        <div id="projects" className="mt-0 flex flex-col relative z-10 scroll-mt-24">
+          <div className="py-2 relative mt-1">
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Projects</h2>
+
+            {/* Horizontal line below Projects heading */}
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            {/* Intersections */}
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 left-1/2 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+
+          {/* Grid Container */}
+          <div className="relative pt-6 pb-12 px-4">
+            {/* Center Vertical Line */}
+            <div className="absolute top-0 bottom-6 left-1/2 w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none -translate-x-1/2 hidden md:block" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+
+            <ProjectsGrid />
+
+            {/* Bottom Horizontal Line */}
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            {/* Intersections */}
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            {/* Center dot removed to prevent crossing the outline gap of the View All button */}
+          </div>
+
+          {/* View All Button */}
+          <div className="flex justify-center -mt-[19px] pb-0 relative z-20">
+            <Link href="/projects" className="relative group block">
+              <div className="absolute -inset-[5px] border border-black/5 dark:border-white/5 rounded-[11px] pointer-events-none transition-colors duration-300 group-hover:border-black/10 dark:group-hover:border-white/10" />
+              <div className="relative flex items-center gap-1.5 px-4 py-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#09090b] dark:hover:bg-[#121214] text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-[6px] text-[13px] font-medium transition-all duration-300 border border-black/5 dark:border-white/5 shadow-sm shadow-black/20 dark:shadow-lg dark:shadow-black/80">
+                View All
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-300 transition-colors" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Github Graph */}
+        <GithubGraph />
+
+
+
+        {/* Skills */}
+        <div id="skills" className="mt-6 flex flex-col relative z-10 scroll-mt-24">
+          {/* Top full-width line */}
+          <div
+            className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none"
+            style={{
+              maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)',
+              WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)'
+            }}
+          />
+          {/* Top Line Intersections */}
+          <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+          <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+
+          <div className="py-2 relative mt-1">
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Skills & Technologies</h2>
+
+            {/* Horizontal line below Skills heading */}
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            {/* Intersections */}
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+
+          <div className="relative pt-6 pb-2">
+            <div className="flex flex-wrap gap-2 w-full">
+              {skills.map((skill, index) => (
+                <div key={index} className="grow flex items-center justify-center gap-2 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#0a0a0a] dark:hover:bg-[#121214] border border-black/30 dark:border-white/[0.15] rounded-[6px] transition-colors duration-200 cursor-default">
+                  <img
+                    src={skill.icon.startsWith('http') ? skill.icon : `https://cdn.simpleicons.org/${skill.icon}/71717a`}
+                    alt={skill.name}
+                    width={14}
+                    height={14}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-3.5 w-3.5 opacity-80 ${skill.icon.startsWith('http') ? 'rounded-sm grayscale' : ''}`}
+                  />
+                  <span className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Blogs */}
+        <div id="blogs" className="mt-6 flex flex-col relative scroll-mt-24">
+          {/* Top full-width line */}
+          <div
+            className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none"
+            style={{
+              maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)',
+              WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)'
+            }}
+          />
+          {/* Top Line Intersections */}
+          <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+          <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+
+          <div className="py-2 relative mt-1">
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Blogs</h2>
+
+            {/* Horizontal line below Blogs heading */}
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            {/* Intersections */}
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+
+          <div className="h-16 flex items-center justify-center w-full">
+            <span className="font-mono text-xs tracking-widest text-zinc-400 dark:text-zinc-500 lowercase text-center">coming soon...</span>
+          </div>
+        </div>
+
+        {/* Highlights */}
+        <div id="highlights" className="mt-0 flex flex-col relative z-10 scroll-mt-24">
+          {/* Top full-width line */}
+          <div
+            className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none"
+            style={{
+              maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)',
+              WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)'
+            }}
+          />
+          {/* Top Line Intersections */}
+          <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+          <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+
+          <div className="py-2 relative mt-1">
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Highlights</h2>
+
+            {/* Horizontal line below heading */}
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            {/* Intersections */}
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+
+          <Highlights />
+
+          {/* Bottom line */}
+          <div className="relative mt-4 pb-4">
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+        </div>
+
+        {/* Minimal Quote Section */}
+        <div className="mt-12 flex flex-col items-center justify-center relative py-12">
+          <div className="max-w-[480px] w-full flex flex-col items-center">
+            <h3 className="text-[16px] font-medium text-center leading-relaxed text-zinc-500 dark:text-zinc-400 mb-6 italic">
+              &quot;Live in the future, then build what&apos;s missing.&quot;
+            </h3>
+
+            <div className="flex items-center gap-3 text-[10px] font-medium tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase">
+              <div className="w-4 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
+              PAUL GRAHAM
+              <div className="w-4 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
+            </div>
+          </div>
+        </div>
+
+        {/* Fading Grid Filler */}
+        <div className="flex-grow w-[calc(100%+32px)] -mx-4 h-[300px] relative mt-4">
+          {/* Top full-width line */}
+          <div
+            className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none z-10"
+            style={{
+              maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)',
+              WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)'
+            }}
+          />
+          {/* Intersections */}
+          <div className="absolute top-0 left-0 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+          <div className="absolute top-0 right-0 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+
+          <FooterBackground />
+        </div>
+
+      </div>
+
     </div>
   );
 }

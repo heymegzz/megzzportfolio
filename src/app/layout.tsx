@@ -1,28 +1,37 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Doto } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const inter = Inter({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
-const doto = Doto({
-  subsets: ["latin"],
-  variable: "--font-doto",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Meghna Nair",
-  description: "Portfolio of Meghna Nair, a Full-Stack AI & ML Engineer.",
+  description:
+    "Full stack developer building clean, modern websites and apps with a focus on design, functionality, and attention to detail.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "256x256" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
+  openGraph: {
+    title: "Meghna Nair",
+    description:
+      "Full stack developer building clean, modern websites and apps.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -31,11 +40,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${doto.variable} font-sans bg-white text-zinc-950 dark:bg-black dark:text-zinc-50 antialiased transition-colors duration-300`}
-      >
-        {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col dark:bg-black dark:text-zinc-50 transition-colors duration-300">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
