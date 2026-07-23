@@ -64,12 +64,12 @@ export function CommandMenu() {
                 target.tagName === 'TEXTAREA' ||
                 target.tagName === 'SELECT'
 
-            if (!open) {
+            // If typing in a regular form, ignore shortcuts so users can type capital letters.
+            // If the command menu is open, we allow shortcuts even if the search input is focused.
+            if (!open && isTypingField) {
                 return
             }
 
-            // When the command palette is open, we still want shortcuts to work
-            // even if the search input is focused.
             if (e.shiftKey) {
                 const key = e.key.toLowerCase()
 
@@ -108,14 +108,11 @@ export function CommandMenu() {
                     e.preventDefault()
                     runCommand(() => setTheme("system"))
                 }
-            } else if (isTypingField) {
-                // Allow normal typing when no shortcut is being used
-                return
             }
         }
 
-        document.addEventListener("keydown", down)
-        return () => document.removeEventListener("keydown", down)
+        document.addEventListener("keydown", down, true)
+        return () => document.removeEventListener("keydown", down, true)
     }, [open, openExternal, runCommand, setTheme])
 
     return (
