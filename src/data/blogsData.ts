@@ -638,7 +638,7 @@ export const blogsData: Blog[] = [
     date: "Feb 2025",
     claps: 104,
     tags: ["Authentication", "TypeScript", "MongoDB"],
-    link: "https://medium.com/@Meghna Nair",
+    link: "https://medium.com/@heymegzz",
     isExternal: true,
   }
 ];

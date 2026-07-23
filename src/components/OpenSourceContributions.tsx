@@ -33,9 +33,9 @@ type GitHubSearchResponse = {
 type FilterType = "merged" | "open" | "closed";
 
 const SEARCH_QUERIES: Record<FilterType, string> = {
-  merged: "author:Meghna Nair type:pr is:merged",
-  open: "author:Meghna Nair type:pr is:open",
-  closed: "author:Meghna Nair type:pr is:closed is:unmerged",
+  merged: "author:heymegzz type:pr is:merged",
+  open: "author:heymegzz type:pr is:open",
+  closed: "author:heymegzz type:pr is:closed is:unmerged",
 };
 
 function buildGraphQLQuery(searchQuery: string) {
@@ -103,7 +103,7 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
       if (data.data?.search?.edges) {
         const fetchedPRs = data.data.search.edges
           .flatMap((edge) => (edge?.node ? [edge.node] : []))
-          .filter((pr: PR) => !(pr.title === "Main" && pr.repository.nameWithOwner === "Meghna Nair/flexprice-storybook"));
+          .filter((pr: PR) => !(pr.title === "Main" && pr.repository.nameWithOwner === "heymegzz/flexprice-storybook"));
         fetchedPRs.sort((a: PR, b: PR) => {
           const dateA = new Date(b.mergedAt || b.closedAt || b.createdAt).getTime();
           const dateB = new Date(a.mergedAt || a.closedAt || a.createdAt).getTime();
